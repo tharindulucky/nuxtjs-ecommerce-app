@@ -2,7 +2,7 @@
   <article class="card">
     <nuxt-link :to="'/products/'+ id">
       <figure class="thumbnail">
-        <img :src="thumbnail" alt="meow">
+        <img :src="'http://34.69.62.97:3000/uploads/'+thumbnail" alt="meow">
       </figure>
       <div class="card-content">
         <h2>{{title}}</h2>
@@ -17,7 +17,7 @@
   export default {
     name: "ProductThumbnail",
     props: {
-      id:{type: String, required: true},
+      id:{type: Number, required: true},
       title:{type: String, required: true},
       description:{type: String, required: true},
       thumbnail:{type: String, required: true},

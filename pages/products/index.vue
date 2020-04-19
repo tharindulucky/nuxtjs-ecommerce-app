@@ -4,7 +4,7 @@
 
     <main class="main-area">
       <div class="centered">
-        <ProductsList/>
+        <ProductsList :products="loadedProducts"/>
       </div>
     </main>
   </div>
@@ -16,6 +16,12 @@
   export default {
     components: {
       ProductsList: ProductsList
+    },
+
+    computed: {
+      loadedProducts(){
+        return this.$store.getters.getLoadedProducts;
+      }
     }
   }
 </script>

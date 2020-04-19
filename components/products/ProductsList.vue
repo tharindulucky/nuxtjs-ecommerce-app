@@ -1,8 +1,6 @@
 <template>
   <section class="cards">
-    <ProductThumbnail id="1" title="Pancha" description="Meow meow meow 1" thumbnail="http://placekitten.com/800/610"/>
-    <ProductThumbnail id="2" title="Zimba" description="Meow meow meow 2" thumbnail="http://placekitten.com/800/600"/>
-    <ProductThumbnail id="3" title="Sudu" description="Meow meow meow 3" thumbnail="http://placekitten.com/800/620"/>
+    <ProductThumbnail v-for="product in products" :key="product.id" :id="product.id" :title="product.title" :description="product.description" :thumbnail="typeof product.images[0] === 'undefined' ? '1583575524974.png' : product.images[0].url "/>
   </section>
 </template>
 
@@ -12,6 +10,10 @@
   export default {
     components: {
       ProductThumbnail: ProductThumbnail,
+    },
+
+    props: {
+      products: {type: Array, required: true}
     }
   }
 </script>
