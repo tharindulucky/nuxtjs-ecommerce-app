@@ -6,7 +6,7 @@
         <section class="products">
           <h1>{{loadedProduct.title}}</h1>
           <p style="display: inline;">Posted on
-            <nuxt-link style="display:inline; padding: 0;" :class="'nav-link'" :to="'/categories/'+loadedProduct.category.id">{{loadedProduct.category.name}}</nuxt-link>
+            <nuxt-link style="display:inline; padding: 0;" :class="'nav-link'" :to="'/categories/'+loadedProduct.parent_category.id">{{loadedProduct.parent_category.name}}</nuxt-link>
             >
             <nuxt-link style="display: inline; padding: 0;" :class="'nav-link'" :to="'/sub-category/'+loadedProduct.sub_category.id">{{loadedProduct.sub_category.name}}</nuxt-link>
 

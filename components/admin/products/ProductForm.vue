@@ -1,5 +1,8 @@
 <template>
   <form @submit.prevent="saveProduct" id="productForm">
+
+    <input type="text" v-model="newProduct.id" reaonly hidden>
+
     <div class="form-group">
       <label>Title</label>
       <input name="title" v-model="newProduct.title" type="text" class="form-control" placeholder="Enter here..." autocomplete="nope" :readonly="readonly">
@@ -61,6 +64,7 @@
     data() {
       return {
         newProduct: this.product ? {...this.product} : {
+          id:'',
           title: '',
           description: '',
           parent_category: '',

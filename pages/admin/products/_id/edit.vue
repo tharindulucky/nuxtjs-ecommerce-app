@@ -23,6 +23,7 @@
       return axios.get('http://34.69.62.97:3000/products/'+ context.params.id).then(response => {
         return {
           loadedProduct: {
+            id: context.params.id,
             title: response.data.title,
             description: response.data.title,
             price: response.data.price,
@@ -40,21 +41,11 @@
     methods: {
       updateProduct(newProductData){
 
-        console.log(newProductData);
-
-        const headers = {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlbW9AZGVtby5jb20iLCJ1c2VySWQiOjEsInVzZXJMZXZlbCI6InVzZXIiLCJpYXQiOjE1ODcyODI3NjcsImV4cCI6MTU4NzI4NjM2N30.RHNhN2Ti0BN9N3DYjE6lEGpWA7ftQeU_XnWmOGhMyGI'
-        };
-
-        console.log(newProductData);
-
-        axios.patch('http://34.69.62.97:3000/products/' + this.$route.params.id, newProductData, {headers: headers}).then(result => {
-          console.log(result);
-          this.$router.push('/admin/products');
-        }).catch(e => {
-          console.log(e);
+        this.$store.dispatch("updateProduct", newProductData).then(() => {
+          this.$router.push("/admin/products");
         });
+
+
       }
     },
 

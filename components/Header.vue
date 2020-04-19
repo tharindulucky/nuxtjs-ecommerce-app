@@ -17,7 +17,7 @@
             <nuxt-link  :class="'nav-link'" :to="'/about'" data-toggle="collapse" data-target="#navbarCollapse">About</nuxt-link>
           </li>
           <li class="nav-item">
-            <nuxt-link  :class="'nav-link'" :to="'/login'" data-toggle="collapse" data-target="#navbarCollapse">Login</nuxt-link>
+            <nuxt-link  :class="'nav-link'" :to="'/admin'" data-toggle="collapse" data-target="#navbarCollapse">Login</nuxt-link>
           </li>
         </ul>
       </div>

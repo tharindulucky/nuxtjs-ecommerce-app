@@ -1,6 +1,6 @@
 <template>
   <section class="cards">
-    <ProductThumbnail v-for="product in products" :key="product.id" :id="product.id" :title="product.title" :description="product.description" :thumbnail="typeof product.images[0] === 'undefined' ? '1583575524974.png' : product.images[0].url "/>
+    <ProductThumbnail v-for="product in products" :key="product.id" :id="product.id" :title="product.title" :description="product.description" :thumbnail="'1583575524974.png'"/>
   </section>
 </template>
 

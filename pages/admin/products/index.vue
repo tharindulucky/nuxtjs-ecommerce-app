@@ -41,22 +41,12 @@
   export default {
     layout: 'admin',
 
-    asyncData(context){
-
-      const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlbW9AZGVtby5jb20iLCJ1c2VySWQiOjEsInVzZXJMZXZlbCI6InVzZXIiLCJpYXQiOjE1ODcyODI3NjcsImV4cCI6MTU4NzI4NjM2N30.RHNhN2Ti0BN9N3DYjE6lEGpWA7ftQeU_XnWmOGhMyGI'
-      };
-
-      return axios.get('http://34.69.62.97:3000/products/myproducts?page=4', {headers: headers}).then(response => {
-        return {
-          loadedProducts: response.data.products
-        };
-
-      }).catch(e => {
-        //context.error(e);
-        console.log(e);
-      });
+    computed: {
+      loadedProducts(){
+        const myProducts = this.$store.getters.getMyProducts;
+        myProducts.sort((a, b) => b.id - a.id);
+        return myProducts;
+      }
     }
   }
 </script>

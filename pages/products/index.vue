@@ -20,7 +20,9 @@
 
     computed: {
       loadedProducts(){
-        return this.$store.getters.getLoadedProducts;
+        const products = this.$store.getters.getLoadedProducts;
+        products.sort((a, b) => b.id - a.id);
+        return products;
       }
     }
   }

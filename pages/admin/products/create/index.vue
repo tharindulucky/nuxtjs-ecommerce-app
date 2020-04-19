@@ -21,17 +21,8 @@
 
     methods:{
       saveProduct(newProductData){
-
-        const headers = {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlbW9AZGVtby5jb20iLCJ1c2VySWQiOjEsInVzZXJMZXZlbCI6InVzZXIiLCJpYXQiOjE1ODcyODI3NjcsImV4cCI6MTU4NzI4NjM2N30.RHNhN2Ti0BN9N3DYjE6lEGpWA7ftQeU_XnWmOGhMyGI'
-        };
-
-        axios.post('http://34.69.62.97:3000/products', newProductData, {headers: headers}).then(result => {
-          console.log(result);
-          this.$router.push('/admin/products');
-        }).catch(e => {
-          console.log(e);
+        this.$store.dispatch("addProduct", newProductData).then(() => {
+          this.$router.push("/admin/products");
         });
       }
     },
