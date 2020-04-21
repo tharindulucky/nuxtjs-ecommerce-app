@@ -7,19 +7,14 @@ const createStore = () => {
 
     state: {
       loadedProducts: [],
-      myProducts: [],
       categories: [],
-      access_token: "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlbW9AZGVtby5jb20iLCJ1c2VySWQiOjEsInVzZXJMZXZlbCI6InVzZXIiLCJpYXQiOjE1ODczMjcyNzAsImV4cCI6MTU4NzMzMDg3MH0.u6Ea8QtlFt898IDzCzZXqYAnMKFnVvRQ9sp6o6xZtnY"
+      access_token: "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlbW9AZGVtby5jb20iLCJ1c2VySWQiOjEsInVzZXJMZXZlbCI6InVzZXIiLCJpYXQiOjE1ODc0NDQ5MDUsImV4cCI6MTU4NzQ0ODUwNX0.SZvaKXDfWx9QudvTYYvx3hT2ganCv6UX52Cda3W_2lI"
     },
 
 
     mutations: {
       setLoadedProducts(state, products){
         state.loadedProducts = products
-      },
-
-      setMyProducts(state, products){
-        state.myProducts = products
       },
 
       setCategories(state, categories){
@@ -45,18 +40,11 @@ const createStore = () => {
     actions: {
 
       async nuxtServerInit(vuexContext, context) {
-          const produtsArrRes = await axios.get('http://34.69.62.97:3000/products?page=0');
+
+          const produtsArrRes = await axios.get(process.env.baseUrl + '/products?page=0');
           vuexContext.commit('setLoadedProducts', produtsArrRes.data.products);
 
-          const headers = {
-            'Content-Type': 'application/json',
-            'Authorization': vuexContext.state.access_token
-          };
-
-          const myProductsArrRes = await axios.get('http://34.69.62.97:3000/products/myproducts?page=0', {headers: headers});
-          vuexContext.commit('setMyProducts', myProductsArrRes.data.products);
-
-          const categoriesArrRes = await axios.get('http://34.69.62.97:3000/categories');
+          const categoriesArrRes = await axios.get(process.env.baseUrl + '/categories');
           vuexContext.commit('setCategories', categoriesArrRes.data);
       },
 
@@ -64,9 +52,6 @@ const createStore = () => {
         vuexContext.commit('setLoadedProducts', products);
       },
 
-      setMyProducts(vuexContext, products){
-        vuexContext.commit('setCategories', products);
-      },
 
       setCategories(vuexContext, categories){
         vuexContext.commit('setCategories', categories);
@@ -79,7 +64,7 @@ const createStore = () => {
           'Authorization': vuexContext.state.access_token
         };
 
-        return axios.post('http://34.69.62.97:3000/products', product, {headers: headers}).then(result => {
+        return axios.post(process.env.baseUrl + '/products', product, {headers: headers}).then(result => {
           vuexContext.commit('addProduct', result.data.product);
         }).catch(e => {
           console.log(e);
@@ -94,7 +79,7 @@ const createStore = () => {
         };
 
         console.log(updatedProduct);
-        return axios.patch('http://34.69.62.97:3000/products/' + updatedProduct.id, updatedProduct, {headers: headers}).then(result => {
+        return axios.patch(process.env.baseUrl + '/products/' + updatedProduct.id, updatedProduct, {headers: headers}).then(result => {
           vuexContext.commit('updateProduct', result.data.product);
         }).catch(e => {
           console.log(e);
@@ -106,10 +91,6 @@ const createStore = () => {
     getters: {
       getLoadedProducts(state){
         return state.loadedProducts;
-      },
-
-      getMyProducts(state){
-        return state.myProducts;
       },
 
       getCategories(state){

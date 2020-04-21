@@ -41,12 +41,20 @@
   export default {
     layout: 'admin',
 
-    computed: {
-      loadedProducts(){
-        const myProducts = this.$store.getters.getMyProducts;
-        myProducts.sort((a, b) => b.id - a.id);
-        return myProducts;
-      }
-    }
+    asyncData(context){
+        const headers = {
+          'Content-Type': 'application/json',
+          'Authorization': context.store.getters.getAccessToken
+        };
+
+        return axios.get(process.env.baseUrl + '/products/myproducts?page=0', {headers: headers}).then(result => {
+          return {
+            loadedProducts: result.data.products.sort((a, b) => b.id - a.id)
+          };
+        }).catch(e => {
+          console.log(e);
+        });
+
+    },
   }
 </script>

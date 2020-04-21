@@ -20,12 +20,12 @@
     },
 
     asyncData(context){
-      return axios.get('http://34.69.62.97:3000/products/'+ context.params.id).then(response => {
+      return axios.get(process.env.baseUrl + '/products/'+ context.params.id).then(response => {
         return {
           loadedProduct: {
             id: context.params.id,
             title: response.data.title,
-            description: response.data.title,
+            description: response.data.description,
             price: response.data.price,
             parent_category: response.data.parent_category.id,
             sub_category: response.data.sub_category.id,

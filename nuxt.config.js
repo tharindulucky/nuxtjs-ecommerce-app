@@ -58,5 +58,10 @@ export default {
     */
     extend (config, ctx) {
     }
+  },
+
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://34.69.62.97:3000'
   }
+
 }
