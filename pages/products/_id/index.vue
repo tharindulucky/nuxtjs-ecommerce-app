@@ -5,14 +5,13 @@
       <div class="centered">
         <section class="products">
           <h1>{{loadedProduct.title}}</h1>
-          <p style="display: inline;">Posted on
+          <p style="display: inline;">Posted in
             <nuxt-link style="display:inline; padding: 0;" :class="'nav-link'" :to="'/categories/'+loadedProduct.parent_category.id">{{loadedProduct.parent_category.name}}</nuxt-link>
             >
             <nuxt-link style="display: inline; padding: 0;" :class="'nav-link'" :to="'/sub-category/'+loadedProduct.sub_category.id">{{loadedProduct.sub_category.name}}</nuxt-link>
-
             by
-
             <nuxt-link style="display: inline; padding: 0;" :class="'nav-link'" :to="'/users/'+loadedProduct.user.name">{{loadedProduct.user.name}}</nuxt-link>
+            on {{loadedProduct.createdAt | date}}
 
           </p>
           <br> <br>

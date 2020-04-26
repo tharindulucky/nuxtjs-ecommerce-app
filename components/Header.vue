@@ -17,7 +17,11 @@
             <nuxt-link  :class="'nav-link'" :to="'/about'" data-toggle="collapse" data-target="#navbarCollapse">About</nuxt-link>
           </li>
           <li class="nav-item">
-            <nuxt-link  :class="'nav-link'" :to="'/admin'" data-toggle="collapse" data-target="#navbarCollapse">Login</nuxt-link>
+            <nuxt-link v-if="!isLoggedIn" :class="'nav-link'" :to="'/login'" data-toggle="collapse" data-target="#navbarCollapse">Login</nuxt-link>
+            <nuxt-link v-else :class="'nav-link'" :to="'/admin'" data-toggle="collapse" data-target="#navbarCollapse">Admin</nuxt-link>
+          </li>
+          <li class="nav-item">
+            <nuxt-link v-if="isLoggedIn" :to="'#'" :class="'nav-link'" @click.native="logout" data-toggle="collapse" data-target="#navbarCollapse">Logout</nuxt-link>
           </li>
         </ul>
       </div>
@@ -34,3 +38,27 @@
     color: #ffffff !important;
   }
 </style>
+
+<script>
+  export default {
+
+    computed: {
+      isLoggedIn:{
+        get(){
+          return this.$store.getters.isAuthenticated;
+        },
+
+        set(val){
+          return val;
+        },
+      }
+    },
+
+    methods: {
+      logout(){
+        this.$store.dispatch('logout');
+        this.$router.push("/login");
+      }
+    }
+  }
+</script>

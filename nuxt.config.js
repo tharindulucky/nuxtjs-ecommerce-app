@@ -36,7 +36,9 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/element-ui'
+    '@/plugins/element-ui',
+    '@/plugins/core-components',
+    '@/plugins/date-filter'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -62,6 +64,11 @@ export default {
 
   env: {
     baseUrl: process.env.BASE_URL || 'http://34.69.62.97:3000'
+  },
+
+  transition: {
+    name: 'fade',
+    mode: 'out-in'
   }
 
 }

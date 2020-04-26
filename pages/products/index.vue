@@ -11,13 +11,7 @@
 </template>
 
 <script>
-  import ProductsList from '@/components/products/ProductsList';
-
   export default {
-    components: {
-      ProductsList: ProductsList
-    },
-
     computed: {
       loadedProducts(){
         const products = this.$store.getters.getLoadedProducts;

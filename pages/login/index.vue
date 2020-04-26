@@ -1,22 +1,18 @@
 <template>
   <div class="login-form">
-    <form action="/examples/actions/confirmation.php" method="post">
+    <form @submit.prevent="submitLoginForm" method="post" id="loginForm">
       <h2 class="text-center">Log in</h2>
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Username" required="required">
+        <input type="text" class="form-control" placeholder="Username" v-model="user.email" required="required">
       </div>
       <div class="form-group">
-        <input type="password" class="form-control" placeholder="Password" required="required">
+        <input type="password" class="form-control" placeholder="Password" v-model="user.password" required="required">
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-primary btn-block">Log in</button>
       </div>
-      <div class="clearfix">
-        <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
-        <a href="#" class="pull-right">Forgot Password?</a>
-      </div>
     </form>
-    <p class="text-center"><a href="#">Create an Account</a></p>
+    <p class="text-center"><nuxt-link :to="'/signup'">Create an Account</nuxt-link></p>
   </div>
 </template>
 
@@ -43,3 +39,35 @@
     font-weight: bold;
   }
 </style>
+
+<script>
+  import axios from 'axios';
+
+  export default {
+
+    middleware: ['auth-local', 'auth-inverse'],
+
+    data(){
+      return {
+        user: {
+          email:'',
+          password:''
+        }
+      }
+    },
+
+    methods: {
+      submitLoginForm(){
+        $('#loginForm :input').prop('disabled', true);
+
+        this.$store.dispatch('authenticateUser', this.user).then((result) => {
+          if(result){
+            this.$router.push("/admin");
+          }else{
+            $('#loginForm :input').prop('disabled', false);
+          }
+        });
+      }
+    }
+  }
+</script>

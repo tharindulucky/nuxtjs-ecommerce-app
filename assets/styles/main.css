@@ -44,3 +44,12 @@ img {
     margin-top: inherit;
   }
 } /* mq 60em*/
+
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}

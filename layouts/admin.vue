@@ -21,6 +21,9 @@
   import Nav from '@/components/admin/nav';
 
   export default {
+
+    middleware: ['auth-local', 'auth'],
+
     components: {
       Header: Header,
       Nav: Nav

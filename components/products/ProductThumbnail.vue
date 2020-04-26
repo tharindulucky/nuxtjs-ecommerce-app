@@ -5,7 +5,7 @@
         <img :src="'http://34.69.62.97:3000/uploads/'+thumbnail" alt="meow">
       </figure>
       <div class="card-content">
-        <h2>{{title}}</h2>
+        <h6><b>{{title}}</b></h6>
         <p>{{description}}</p>
       </div>
       <!-- .card-content -->
